@@ -51,7 +51,7 @@ io.on('connection', (socket) => {
     socket.on('add-user', (userId, user) => {
         addUser(userId, socket?.id, user)
         io.emit('getUser', users)
-     
+
     })
 
     socket.on("sendMessage", (msg) => {
@@ -60,9 +60,14 @@ io.on('connection', (socket) => {
             socket.to(active.socketId).emit('sendMessageToUser', msg)
         }
     })
-
+    socket.on('sendTypingInput', data => {
+        console.log(data)
+        const active = activeUser(data.receiverId)
+        if (active !== undefined) {
+            socket.to(active.socketId).emit('sendTypingInputMsg', data)
+        }
+    })
     socket.on('disconnect', () => {
-     
         removeUser(socket.id)
     })
 })
