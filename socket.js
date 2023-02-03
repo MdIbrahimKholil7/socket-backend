@@ -61,7 +61,7 @@ io.on('connection', (socket) => {
         }
     })
     socket.on('sendTypingInput', data => {
-        console.log(data)
+
         const active = activeUser(data.receiverId)
         if (active !== undefined) {
             socket.to(active.socketId).emit('sendTypingInputMsg', data)
@@ -70,6 +70,22 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         removeUser(socket.id)
     })
+
+
+    // calling 
+    socket.emit("me", socket.id);
+    socket.on("disconnect", () => {
+        socket.broadcast.emit("callEnded")
+    });
+
+    socket.on("callUser", ({ userToCall, signalData, from, name }) => {
+       
+        io.to(userToCall).emit("callUsers", { signal: signalData, from, name });
+    });
+
+    socket.on("answerCall", (data) => {
+        io.to(data.to).emit("callAccepted", data.signal)
+    });
 })
 
 
