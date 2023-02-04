@@ -39,11 +39,16 @@ const server = app.listen(PORT, () => {
 })
 
 const io = require("socket.io")(server, {
+
     pingTimeout: 60000,
     cors: {
-        origin: ["http://localhost:3000","https://chat-frontend-mocha.vercel.app/"],
+        origin: [
+            "http://localhost:3000",
+            "https://chat-frontend-mocha.vercel.app/"
+        ],
         credentials: true,
     },
+    
 });
 
 io.on('connection', (socket) => {
@@ -79,7 +84,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on("callUser", ({ userToCall, signalData, from, name }) => {
-       
+
         io.to(userToCall).emit("callUsers", { signal: signalData, from, name });
     });
 
