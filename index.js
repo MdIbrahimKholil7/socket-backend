@@ -15,6 +15,15 @@ const PORT = process.env.port || 5000
 
 let users = []
 
+// for checking 
+app.get('/', async (req, res) => {
+    res.status(200).send({
+        message: 'Success',
+        status: true
+    })
+})
+
+
 const addUser = (userId, socketId, user) => {
 
     const isUser = users.some(u => u.userId === userId)
@@ -48,7 +57,7 @@ const io = require("socket.io")(server, {
         ],
         credentials: true,
     },
-    
+
 });
 
 io.on('connection', (socket) => {
