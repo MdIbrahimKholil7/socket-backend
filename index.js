@@ -1,12 +1,12 @@
 require("dotenv").config();
 const express = require('express');
-const cors = require('cors');
+// const cors = require('cors');
 const app = express()
 app.use(express.json())
-app.use(cors({
-    origin: "*",
-    methods: ["GET", "POST"]
-}))
+// app.use(cors({
+//     origin: "*",
+//     methods: ["GET", "POST"]
+// }))
 const PORT = process.env.port || 5000
 
 
@@ -46,11 +46,11 @@ const server = app.listen(PORT, () => {
 
 const io = require("socket.io")(server, {
 
-    pingTimeout: 60000,
     cors: {
-        origin: "*",
+        origin: "*:*",
         methods: ["GET", "POST" ]
     },
+    pingTimeout: 60000,
 });
 
 io.on('connection', (socket) => {
