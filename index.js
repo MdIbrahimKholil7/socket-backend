@@ -48,7 +48,7 @@ const io = require("socket.io")(server, {
 
     pingTimeout: 60000,
     cors: {
-        origin: true,
+        origin: ['http://localhost:3000','https://chat-frontend-mocha.vercel.app/'],
         methods: ["GET", "POST"]
     },
 });
