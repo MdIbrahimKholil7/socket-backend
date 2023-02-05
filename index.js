@@ -4,21 +4,12 @@ const cors = require('cors');
 const app = express()
 app.use(express.json())
 app.use(cors({
-    origin: [
-        "http://localhost:3000",
-        "https://chat-frontend-mocha.vercel.app/"
-    ],
+    origin: true,
     credentials: true,
     optionSuccessStatus: 200
 }))
 const PORT = process.env.port || 5000
-// const io = require('socket.io')(5000, {
-//     cors: {
-//         origin: '*',
-//         method: ['POST', "GET"]
-//     }
-// });
-// const io = require('socket.io');
+
 
 let users = []
 
@@ -58,11 +49,9 @@ const io = require("socket.io")(server, {
 
     pingTimeout: 60000,
     cors: {
-        origin: [
-            "http://localhost:3000",
-            "https://chat-frontend-mocha.vercel.app/"
-        ],
+        origin: true,
         credentials: true,
+        optionSuccessStatus: 200
     },
 
 });
