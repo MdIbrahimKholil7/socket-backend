@@ -5,8 +5,6 @@ const app = express()
 app.use(express.json())
 app.use(cors({
     origin: true,
-    credentials: true,
-    optionSuccessStatus: 200
 }))
 const PORT = process.env.port || 5000
 
@@ -50,8 +48,7 @@ const io = require("socket.io")(server, {
     pingTimeout: 60000,
     cors: {
         origin: true,
-        credentials: true,
-        optionSuccessStatus: 200
+        
     },
 
 });
