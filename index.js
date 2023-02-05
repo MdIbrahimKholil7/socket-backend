@@ -1,14 +1,13 @@
 require("dotenv").config();
 const express = require('express');
-// const cors = require('cors');
+const cors = require('cors');
 const app = express()
 app.use(express.json())
-// app.use(cors({
-//     origin: "*",
-//     methods: ["GET", "POST"]
-// }))
+app.use(cors({
+    origin: "*",
+    optionsSuccessStatus: 200
+}))
 const PORT = process.env.port || 5000
-
 
 let users = []
 
@@ -47,8 +46,9 @@ const server = app.listen(PORT, () => {
 const io = require("socket.io")(server, {
 
     cors: {
-        origin: true,
-        credentials: true
+        origin: "*",
+        methods: ["PUT", "GET", "POST", "DELETE", "OPTIONS"],
+        credentials: false
     },
     pingTimeout: 60000,
 });
