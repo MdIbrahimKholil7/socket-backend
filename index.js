@@ -47,8 +47,7 @@ const io = require("socket.io")(server, {
 
     cors: {
         origin: "*",
-        methods: ["PUT", "GET", "POST", "DELETE", "OPTIONS"],
-        credentials: false
+      
     },
     pingTimeout: 60000,
 });
