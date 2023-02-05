@@ -3,9 +3,10 @@ const express = require('express');
 const cors = require('cors');
 const app = express()
 app.use(express.json())
-// app.use(cors({
-//     origin: true,
-// }))
+app.use(cors({
+    origin: true,
+    methods: ["GET", "POST"]
+}))
 const PORT = process.env.port || 5000
 
 
@@ -48,9 +49,8 @@ const io = require("socket.io")(server, {
     pingTimeout: 60000,
     cors: {
         origin: true,
-        
+        methods: ["GET", "POST"]
     },
-
 });
 
 io.on('connection', (socket) => {
