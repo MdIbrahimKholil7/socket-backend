@@ -44,20 +44,9 @@ const server = app.listen(PORT, () => {
 })
 
 const io = require("socket.io")(server, {
-
-    cors: {
-        origin: "*",
-      
-    },
     pingTimeout: 60000,
 });
-io.engine.on("initial_headers", (headers, req) => {
-    headers["Access-Control-Allow-Origin"] = "http://localhost:3001";
-});
 
-io.engine.on("headers", (headers, req) => {
-    headers["Access-Control-Allow-Origin"] = "http://localhost:3001"; // url to all
-});
 io.on('connection', (socket) => {
 
     socket.on('add-user', (userId, user) => {
