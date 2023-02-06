@@ -3,10 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express()
 app.use(express.json())
-app.use(cors({
-    origin: true,
-    optionsSuccessStatus: 200
-}))
+app.use(cors())
 const PORT = process.env.PORT || 5000
 
 let users = []
@@ -43,9 +40,7 @@ const server = app.listen(PORT, () => {
     console.log('socket server is running on port ', PORT)
 })
 
-const io = require("socket.io")(server, {
-    pingTimeout: 60000,
-});
+const io = require("socket.io")(server, {cors: {origin: "*"}});
 
 io.on('connection', (socket) => {
 
