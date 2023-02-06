@@ -52,11 +52,11 @@ const io = require("socket.io")(server, {
     pingTimeout: 60000,
 });
 io.engine.on("initial_headers", (headers, req) => {
-    headers["Access-Control-Allow-Origin"] = "http://localhost:3-00";
+    headers["Access-Control-Allow-Origin"] = "http://localhost:3001";
 });
 
 io.engine.on("headers", (headers, req) => {
-    headers["Access-Control-Allow-Origin"] = "http://localhost:3000"; // url to all
+    headers["Access-Control-Allow-Origin"] = "http://localhost:3001"; // url to all
 });
 io.on('connection', (socket) => {
 
