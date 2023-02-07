@@ -43,7 +43,6 @@ const server = app.listen(PORT, () => {
 const io = require("socket.io")(server, {cors: {origin: "*"}});
 
 io.on('connection', (socket) => {
-
     socket.on('add-user', (userId, user) => {
         addUser(userId, socket?.id, user)
         io.emit('getUser', users)
